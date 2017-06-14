@@ -43,7 +43,7 @@ option = option = {
         // ,'最低气温'
     },
     toolbox: {
-        show : true,
+        show : false,//隐藏开发中的工具栏
         feature : {
             mark : {show: true},
             dataView : {show: true, readOnly: false},
@@ -96,6 +96,7 @@ option = option = {
         {
             name:'告警',
             type:'line',
+            smooth:true,  //这句就是让曲线变平滑的
             data:[0, 6, 8, 13, 12, 16, 20],
             markPoint : {
                 data : [
@@ -103,11 +104,16 @@ option = option = {
                     // ,{type : 'min', name: '最小值'}
                 ]
             },
-            markLine : {
-                data : [
-                    {type : 'average', name: '平均值'}
-                ]
-            }
+            // markLine : {  //显示中间线
+            //     data : [
+            //         {type : 'average', name: '平均值'}
+            //     ]
+            // },
+            itemStyle : {
+                                normal : {
+                                    color:'#000000'
+                                }
+                            },
         }
         // ,
         // {
