@@ -35,6 +35,7 @@ option = {
         {
             name:'访问来源',
             type:'pie',
+            animation:false,
             selectedMode: 'single',
             radius: [0, '30%'],
 
@@ -49,8 +50,31 @@ option = {
                 }
             },
             data:[
-                {value:1548, name:'搜索引擎'}
-            ]
+                {value:1548, name:'1548 \n搜索引擎'}
+            ],
+            label: {
+                normal: {
+                    formatter: function (obj) {
+                        return obj.name.title
+                    },
+                    show: true,
+                    position: 'center',//文字显示位置,如上图中的1.0,1.1字样
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'normal',
+                        color:"#fff"
+                    }
+                },
+                emphasis: {
+                    //show: true,
+                    position: 'center',
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'normal',
+                        color:"#fff"
+                    }
+                }
+            }
         },
         {
             name:'访问来源',
