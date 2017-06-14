@@ -3,7 +3,7 @@
    <head>
        <meta charset="utf-8">
    </head>
-   <body style="height: 100%; margin: 0">
+   <body style="height: 100%; margin: 0;background: black;">
        <div id="container" style="height: 100%"></div>
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
 
@@ -31,26 +31,14 @@ option = null;
 app.title = '折线图';
 
 option = option = {
-    title : {
-        // text: '未来一周气温变化',
-        // subtext: '纯属虚构'
-    },
     tooltip : {
         trigger: 'axis'
     },
     legend: {
         data:['告警次数']
-        // ,'最低气温'
     },
     toolbox: {
-        show : false,//隐藏开发中的工具栏
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            magicType : {show: true, type: ['line', 'bar']},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
+        show : false//隐藏开发中的工具栏
     },
     calculable : true,
     xAxis : [
@@ -58,16 +46,34 @@ option = option = {
           interval:'0',
             type : 'category',
             boundaryGap : false,
-            data : ['8/1','8/2','8/3','8/4','8/5','8/6','8/7']
+            data : ['8/1','8/2','8/3','8/4','8/5','8/6','8/7'],
+            textStyle: {color: '#fff'},
+            //设置轴线的属性
+            axisLine:{
+                lineStyle:{
+                    color:'#ddd',
+                    width:3,//这里是为了突出显示加上的
+                }
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: '#ddd',
+                    width: 2,
+                    shadowOffsetY:30,
+                    opacity:0.7
+                }
+            }
         }
     ],
     yAxis : [
         {
           type : 'value',
           axisLabel : {
-              formatter: '{value} °C'
+              formatter: '{value} 次'
           },
-          splitNumber:5,
+          max:20,
+          splitNumber:4,
           axisLabel:{
                    formatter: function (value, index) {
                        var date = new Date(value);
@@ -88,8 +94,23 @@ option = option = {
                            texts.push('危险');
                        }
                        return texts;
-                   }
-               }
+                   },
+                   textStyle: {color: '#fff'}
+               },
+            //设置轴线的属性
+            axisLine:{
+                lineStyle:{
+                    color:'#ddd',
+                    width:3,//这里是为了突出显示加上的
+                }
+            },
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: '#ddd',
+                    width: 2
+                }
+            }
         }
     ],
     series : [
@@ -97,12 +118,13 @@ option = option = {
             name:'告警',
             type:'line',
             smooth:true,  //这句就是让曲线变平滑的
-            data:[0, 6, 8, 13, 12, 16, 20],
+            data:[0, 6, 8, 13, 12, 16, 19],
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'}
-                    // ,{type : 'min', name: '最小值'}
-                ]
+                ],
+                symbol: 'circle',
+                symbolSize:10
             },
             // markLine : {  //显示中间线
             //     data : [
@@ -110,27 +132,11 @@ option = option = {
             //     ]
             // },
             itemStyle : {
-                                normal : {
-                                    color:'#000000'
+                normal : {
+                                    color:'#fff'
                                 }
                             },
         }
-        // ,
-        // {
-        //     name:'最低气温',
-        //     type:'line',
-        //     data:[1, -2, 2, 5, 3, 2, 0],
-        //     markPoint : {
-        //         data : [
-        //             {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
-        //         ]
-        //     },
-        //     markLine : {
-        //         data : [
-        //             {type : 'average', name : '平均值'}
-        //         ]
-        //     }
-        // }
     ]
 };;
 if (option && typeof option === "object") {
